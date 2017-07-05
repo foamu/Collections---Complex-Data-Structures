@@ -1,0 +1,59 @@
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class Jank {
+	
+	public static String[] shipClass = { "Corvette", "Frigate", "Battleship", "Research" };
+	
+	public static String[][] shipName = {
+			{"Constitution", "Andrew Jackson", "Washington"},
+			{"Ticonderoga", "Independence", "John Jay", "Trenton"},
+			{"Hamilton", "Henry Knox"},
+			{"Benjamin Franklin", "John Smith", "Fort Williams", "Fort Hotdog"}
+	};
+
+	public static void main(String[] args) {
+		
+		Map<String, Set<String>> shipNames = new HashMap<String, Set<String>>();
+		
+		for (int i = 0; i < shipClass.length; i++) {
+            String shipClasses = shipClass[i];
+            String[] shipsName = shipName[i];
+
+            Set<String> shipNameSet = new LinkedHashSet<String>();
+
+            for (String name : shipsName) {
+                shipNameSet.add(name);
+                
+            }
+
+            shipNames.put(shipClasses, shipNameSet);
+        }
+		
+		{ // Brackets just to scope shipsNameSet variable so can use again later
+            // Example usage
+            Set<String> shipsNameSet = shipNames.get("Frigate");
+
+            for (String name : shipsNameSet) {
+                System.out.println(name);
+            }
+        }
+
+        // Iterate through whole thing
+        for (String shipclass : shipNames.keySet()) {
+            System.out.print(shipclass);
+            System.out.print(": ");
+            Set<String> nameList = shipNames.get(shipclass);
+
+            for (String shipname : nameList) {
+                System.out.print(shipname);
+                System.out.print(" ");
+            }
+            
+            System.out.println();
+        }
+    }
+
+}
